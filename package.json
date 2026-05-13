@@ -2,7 +2,7 @@
   "name": "gemini-code-assist-rtl",
   "displayName": "Gemini Code Assist RTL Support",
   "description": "Adds an RTL ⇄ toggle button to Gemini Code Assist chat and auto-detects Hebrew/Arabic/Persian per bubble.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "yechielby",
   "license": "MIT",
   "homepage": "https://github.com/YechielBy/gemini-code-assist-rtl-extension#readme",

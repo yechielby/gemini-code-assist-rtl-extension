@@ -1,12 +1,12 @@
-# Gemini Code Assist RTL Support
+# <img src="gemini-code-rtl-logo.png" alt="Gemini Code Assist RTL Logo" width="20"> Gemini Code Assist RTL Support
 ### Adds Right-to-Left (`RTL`) text support for Hebrew, Arabic & Persian to `Gemini Code Assist` in VS Code, Cursor & Antigravity.
 
-![Enhancer](https://img.shields.io/badge/Add--on-Gemini%20Code%20Assist-4285F4?logo=google&logoColor=white)
-![Version](https://img.shields.io/visual-studio-marketplace/v/yechielby.gemini-code-assist-rtl?label=Version&color=4285F4)
+![Enhancer](https://img.shields.io/badge/Add--on-Gemini%20Code%20Assist-4287f6?logo=googlegemini&logoColor=white)
+![Version](https://img.shields.io/open-vsx/v/yechielby/gemini-code-assist-rtl?label=Version&color=c160ef)
 ![IDE](https://img.shields.io/badge/IDE%20Support-VS%20Code%20/%20Cursor%20/%20Antigravity-007ACC)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-> If you find this extension useful, please rate it on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=yechielby.gemini-code-assist-rtl&ssr=false#review-details) and [give it a ⭐ on GitHub](https://github.com/YechielBy/gemini-code-assist-rtl-extension) — it helps others discover it!
+> If you find this extension useful, please rate it on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=yechielby.gemini-code-assist-rtl&ssr=false#review-details) or [Open VSX](https://open-vsx.org/extension/yechielby/gemini-code-assist-rtl/reviews), and [give it a ⭐ on GitHub](https://github.com/YechielBy/gemini-code-assist-rtl-extension) — it helps others discover it!
 
 ---
 
@@ -22,6 +22,17 @@
 | 🇮🇷 | فارسی | <img src="https://flagcdn.com/20x15/ir.png" alt="IR" width="16" height="12"> | [برای توضیح افزونه به فارسی ↓](#persian) |
 
 ---
+
+### 🎬 Demo
+
+<details open>
+    <summary>🖼️ RTL <strong>⇄</strong> Button</summary>
+    <img src="assets/rtl-btn.gif" alt="RTL Toggle Button" width="600" height="auto">
+</details>
+<details>
+    <summary>🖼️ Status Bar</summary>
+    <img src="assets/status-bar.gif" alt="Status Bar" width="600" height="auto">
+</details>
 
 <a id="english"></a>
 

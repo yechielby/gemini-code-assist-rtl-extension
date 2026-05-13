@@ -2,6 +2,9 @@
 
 All notable changes to the "Gemini Code Assist RTL Support" extension will be documented in this file.
 
+## [0.1.1]
+- Added a per-code-block RTL toggle button (⇄) next to the copy button in each code block, allowing users to switch individual code blocks to RTL direction.
+
 ## [0.1.0] - Initial Release
 - Adds an RTL (Right-to-Left) toggle button to the Gemini Code Assist chat interface.
 - Automatically detects RTL languages (Hebrew, Arabic, Persian) on a per-bubble basis.
