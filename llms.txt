@@ -1,0 +1,25 @@
+# Gemini Code Assist RTL Support
+
+Adds Right-to-Left (RTL) text direction support to the **Gemini Code Assist** chat interface in VS Code. Designed for Hebrew, Arabic, and Persian speakers who want natural text alignment when chatting with Gemini — without affecting code blocks or UI elements.
+
+## Technical Details
+
+This extension modifies the installed files of the `google.geminicodeassist` extension on the host machine.
+It locates the extension in `.vscode/extensions` (or `.cursor/extensions`, etc.), and backs up `webview/styles.css`, `webview/app_bundle.js`, and `dist/extension.js`.
+It then injects a CSS payload and a JS payload wrapped in specific markers (`/* RTL Toggle Button - Added by script */`).
+
+### JS Payload
+The JS payload inserts a toggle button `⇄` (`&#x21C4;`) into the webview body. When activated, it adds the `.yby-rtl-active` class to the body.
+It also uses a `MutationObserver` to watch for new nodes matching `p, div, span, li, h1, h2, h3, h4, h5, h6`. If those nodes contain RTL text (Hebrew, Arabic, Persian), it adds the `.YBYrtl` class to the node.
+
+### CSS Payload
+The CSS payload targets `.yby-rtl-active .YBYrtl` with `direction: rtl; text-align: right !important;`.
+It explicitly overrides `pre`, `code`, and `.code-block` to force them back to `direction: ltr !important; text-align: left !important;` so that code snippets in RTL responses are rendered correctly.
+
+## Architecture
+
+- `src/extension.ts`: Entry point. Registers commands to inject or remove RTL.
+- `src/finder.ts`: Locates Gemini installations across platforms (Windows, macOS, Linux, WSL).
+- `src/injector.ts`: Safely reads, backs up, and modifies `styles.css` and `app_bundle.js`.
+- `src/content.ts`: Holds the raw JS and CSS strings for the injection payloads.
+- `src/statusBar.ts`: Manages a single-click status bar toggle `Gemini RTL: On/Off`.

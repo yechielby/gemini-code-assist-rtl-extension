@@ -1,0 +1,84 @@
+{
+  "name": "gemini-code-assist-rtl",
+  "displayName": "Gemini Code Assist RTL Support",
+  "description": "Adds an RTL ⇄ toggle button to Gemini Code Assist chat and auto-detects Hebrew/Arabic/Persian per bubble.",
+  "version": "0.1.0",
+  "publisher": "yechielby",
+  "license": "MIT",
+  "homepage": "https://github.com/YechielBy/gemini-code-assist-rtl-extension#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YechielBy/gemini-code-assist-rtl-extension"
+  },
+  "bugs": {
+    "url": "https://github.com/YechielBy/gemini-code-assist-rtl-extension/issues"
+  },
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": [
+    "Other",
+    "Language Packs"
+  ],
+  "keywords": [
+    "arabic",
+    "arabic-language",
+    "bidi",
+    "bidirectional",
+    "gemini",
+    "gemini-code-assist",
+    "google-gemini",
+    "ai-chat",
+    "hebrew",
+    "hebrew-language",
+    "persian",
+    "persian-language",
+    "farsi",
+    "rtl",
+    "rtl-support",
+    "right-to-left",
+    "text-direction",
+    "vscode-extension",
+    "vs-code-extension"
+  ],
+  "icon": "gemini-code-rtl-logo.png",
+  "badges": [
+    {
+      "url": "https://img.shields.io/github/stars/YechielBy/gemini-code-assist-rtl-extension?style=social",
+      "href": "https://github.com/YechielBy/gemini-code-assist-rtl-extension/stargazers",
+      "description": "Star on GitHub"
+    }
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "gemini-rtl.add",
+        "title": "Gemini RTL: Activate RTL"
+      },
+      {
+        "command": "gemini-rtl.remove",
+        "title": "Gemini RTL: Deactivate RTL"
+      },
+      {
+        "command": "gemini-rtl.status",
+        "title": "Gemini RTL: Check Status"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.mjs --production",
+    "watch": "node esbuild.mjs --watch",
+    "package": "npx @vscode/vsce@latest package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.94.0",
+    "@types/node": "^20.0.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.0"
+  }
+}

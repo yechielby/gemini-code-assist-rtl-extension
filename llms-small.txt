@@ -1,0 +1,5 @@
+# Gemini Code Assist RTL Support
+
+This extension adds Right-To-Left (RTL) alignment support specifically tailored for the Gemini Code Assist chat interface within Visual Studio Code. It provides a toggle button directly in the chat UI and uses a MutationObserver to intelligently detect RTL languages (Hebrew, Arabic, Persian), aligning them properly while ensuring that inline and block code snippets remain strictly Left-To-Right (LTR).
+
+It works by finding the local VS Code extension installation of `google.geminicodeassist`, backing up the CSS and JS webview files, and injecting a custom CSS/JS payload that hooks into the DOM.
