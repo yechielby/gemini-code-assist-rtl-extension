@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/yechi/.vscode/extensions/google.geminicodeassist-2.81.0/**)",
+      "Read(//c/Users/yechi/.claude/plugins/cache/superpowers-dev/superpowers/5.0.7/skills/subagent-driven-development/**)"
+    ]
+  }
+}

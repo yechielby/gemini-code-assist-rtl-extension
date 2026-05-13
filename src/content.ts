@@ -139,6 +139,53 @@ body.yby-rtl-active .mat-mdc-dialog-content .yby-rtl-text {
     text-align: right !important;
 }
 
+/* ==========================================
+   Per-code-block RTL toggle button
+   ========================================== */
+
+.yby-rtl-code-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--vscode-foreground, #ccc);
+    font-size: 14px;
+    font-weight: bold;
+    font-family: var(--vscode-font-family, monospace);
+    padding: 0;
+    margin: 0 0 0 8px !important;
+    box-sizing: border-box;
+    opacity: 0.75;
+    transition: opacity 0.2s, background-color 0.2s;
+}
+
+.yby-rtl-code-btn:hover {
+    opacity: 1;
+    background-color: var(--vscode-toolbar-hoverBackground, rgba(128,128,128,0.2));
+}
+
+body.yby-rtl-active .yby-rtl-code-btn {
+    display: inline-flex;
+}
+
+.yby-rtl-code-btn.yby-active {
+    opacity: 1;
+    background-color: var(--vscode-button-background, #0e639c) !important;
+    color: var(--vscode-button-foreground, #fff) !important;
+}
+
+/* Per-code-block RTL override */
+body.yby-rtl-active pre.yby-rtl-pre code {
+    direction: rtl !important;
+    text-align: right !important;
+    unicode-bidi: plaintext !important;
+}
+
 ${RTL_END_MARKER}
 `;
 
@@ -149,6 +196,43 @@ ${JS_START_MARKER}
     var ACTIVE_CLS = 'yby-rtl-active';
     var RTL_CLS = 'yby-rtl-text';
     var RTL_RE = /[\\u0590-\\u05FF\\u0600-\\u06FF\\u0750-\\u077F\\u08A0-\\u08FF\\uFB50-\\uFDFF\\uFE70-\\uFEFF]/;
+
+    var CODE_BTN_CLS = 'yby-rtl-code-btn';
+    var CODE_RTL_CLS = 'yby-rtl-pre';
+    var ACTION_BTN_SEL = 'div.action-buttons';
+
+    function mkCodeBtn() {
+        var btn = document.createElement('button');
+        btn.className = CODE_BTN_CLS;
+        btn.textContent = '\\u21C4';
+        btn.title = 'Toggle RTL for this code block';
+        btn.setAttribute('aria-label', 'Toggle RTL for this code block');
+        btn.setAttribute('type', 'button');
+
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var pre = btn.closest('pre');
+            if (!pre) return;
+            var isActive = pre.classList.toggle(CODE_RTL_CLS);
+            btn.classList.toggle('yby-active', isActive);
+        });
+
+        return btn;
+    }
+
+    function injectCodeBtns(root) {
+        if (!root || !root.querySelectorAll) return;
+        var containers = root.querySelectorAll(ACTION_BTN_SEL);
+        for (var i = 0; i < containers.length; i++) {
+            var container = containers[i];
+            if (container.querySelector('.' + CODE_BTN_CLS)) continue;
+            var copyBtn = container.querySelector('copy-button');
+            if (!copyBtn) continue;
+            var btn = mkCodeBtn();
+            copyBtn.insertAdjacentElement('afterend', btn);
+        }
+    }
 
     /* Text selectors - targets chat messages, thinking blocks, and message text wrappers */
     var CONTAINERS = [
@@ -230,6 +314,7 @@ ${JS_START_MARKER}
             if (document.body.classList.contains(ACTIVE_CLS)) {
                 applyPerLanguageClasses(true);
             }
+            injectCodeBtns(document.body);
         }, 100);
     }
 
@@ -249,6 +334,7 @@ ${JS_START_MARKER}
                     var nd = m.addedNodes[j];
                     if (nd.nodeType === 1) {
                         scanRoot(nd);
+                        injectCodeBtns(nd);
                         scheduleUpdate();
                     }
                 }
@@ -300,11 +386,13 @@ ${JS_START_MARKER}
     if (document.readyState !== 'loading') {
         tryInsertButton();
         applyPerLanguageClasses(document.body.classList.contains(ACTIVE_CLS));
+        injectCodeBtns(document.body);
         startObserver();
     } else {
         document.addEventListener('DOMContentLoaded', function() {
             tryInsertButton();
             applyPerLanguageClasses(document.body.classList.contains(ACTIVE_CLS));
+            injectCodeBtns(document.body);
             startObserver();
         });
     }

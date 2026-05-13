@@ -3,6 +3,8 @@
 out/**
 node_modules/**
 src/**
+tsconfig.json
+esbuild.mjs
 .gitignore
 .yarnrc
 .eslintrc.json
